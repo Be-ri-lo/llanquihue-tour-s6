@@ -12,13 +12,13 @@ public class GestorServicios {
 
     public void mostrarServicios() {
 
-        System.out.println("=== RUTAS GASTRONÓMICAS ===");
+        System.out.println("--- RUTAS GASTRONÓMICAS ---");
         RutaGastronomica ruta1 = new RutaGastronomica("Sabores del Lago", 4, 5);
         RutaGastronomica ruta2 = new RutaGastronomica("Ruta del Salmón Chilote", 6, 8);
         System.out.println(ruta1);
         System.out.println(ruta2);
 
-        System.out.println("\n=== PASEOS LACUSTRES ===");
+        System.out.println("\n--- PASEOS LACUSTRES ---");
         PaseoLacustre paseo1 = new PaseoLacustre("Navegación Lago Llanquihue", 3, "Catamarán");
         PaseoLacustre paseo2 = new PaseoLacustre("Recorrido Lago Todos los Santos", 5, "Lancha a motor");
         System.out.println(paseo1);

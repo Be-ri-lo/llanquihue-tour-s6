@@ -11,7 +11,7 @@ public class RutaGastronomica extends ServicioTuristico {
 
     public RutaGastronomica(String nombre, int duracionHoras, int numeroDeParadas) {
         super(nombre, duracionHoras);
-        setNumeroDeParadas(numeroDeParadas);
+        this.numeroDeParadas = numeroDeParadas;
     }
 
     public int getNumeroDeParadas() {
@@ -19,9 +19,6 @@ public class RutaGastronomica extends ServicioTuristico {
     }
 
     public void setNumeroDeParadas(int numeroDeParadas) {
-        if (numeroDeParadas <= 0) {
-            throw new IllegalArgumentException("El número de paradas debe ser mayor a 0.");
-        }
         this.numeroDeParadas = numeroDeParadas;
     }
 

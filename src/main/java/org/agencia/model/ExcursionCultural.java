@@ -10,21 +10,22 @@ public class ExcursionCultural extends ServicioTuristico {
     private String lugarHistorico;
 
     public ExcursionCultural(String nombre, int duracionHoras, String lugarHistorico) {
+        //metodo que permite crear el servicio turistico.
         super(nombre, duracionHoras);
-        setLugarHistorico(lugarHistorico);
+        // atributo solo de clase hija
+        this.lugarHistorico = lugarHistorico;
     }
 
+    //Setter y Getter solo de la clase hija
     public String getLugarHistorico() {
         return lugarHistorico;
     }
 
     public void setLugarHistorico(String lugarHistorico) {
-        if (lugarHistorico == null || lugarHistorico.isBlank()) {
-            throw new IllegalArgumentException("El lugar histórico no puede estar vacío.");
-        }
         this.lugarHistorico = lugarHistorico;
     }
 
+    //Override toString
     @Override
     public String toString() {
         return "[Excursión Cultural] " + super.toString() +

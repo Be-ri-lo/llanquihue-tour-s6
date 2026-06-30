@@ -11,8 +11,8 @@ public class ServicioTuristico {
     private int duracionHoras;
 
     public ServicioTuristico(String nombre, int duracionHoras) {
-        setNombre(nombre);
-        setDuracionHoras(duracionHoras);
+        this.nombre = nombre;
+        this.duracionHoras = duracionHoras;
     }
 
     public String getNombre() {
@@ -20,9 +20,6 @@ public class ServicioTuristico {
     }
 
     public void setNombre(String nombre) {
-        if (nombre == null || nombre.isBlank()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío.");
-        }
         this.nombre = nombre;
     }
 
@@ -31,9 +28,6 @@ public class ServicioTuristico {
     }
 
     public void setDuracionHoras(int duracionHoras) {
-        if (duracionHoras <= 0) {
-            throw new IllegalArgumentException("La duración debe ser mayor a 0.");
-        }
         this.duracionHoras = duracionHoras;
     }
 

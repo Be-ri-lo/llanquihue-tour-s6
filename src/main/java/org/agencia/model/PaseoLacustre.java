@@ -11,7 +11,7 @@ public class PaseoLacustre extends ServicioTuristico {
 
     public PaseoLacustre(String nombre, int duracionHoras, String tipoEmbarcacion) {
         super(nombre, duracionHoras);
-        setTipoEmbarcacion(tipoEmbarcacion);
+        this.tipoEmbarcacion = tipoEmbarcacion;
     }
 
     public String getTipoEmbarcacion() {
@@ -19,9 +19,6 @@ public class PaseoLacustre extends ServicioTuristico {
     }
 
     public void setTipoEmbarcacion(String tipoEmbarcacion) {
-        if (tipoEmbarcacion == null || tipoEmbarcacion.isBlank()) {
-            throw new IllegalArgumentException("El tipo de embarcación no puede estar vacío.");
-        }
         this.tipoEmbarcacion = tipoEmbarcacion;
     }
 
