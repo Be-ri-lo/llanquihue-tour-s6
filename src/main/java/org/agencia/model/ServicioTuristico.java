@@ -15,6 +15,14 @@ public class ServicioTuristico {
         this.duracionHoras = duracionHoras;
     }
 
+    /**
+     * Muestra la información básica del servicio. Las subclases
+     * sobrescriben este método para agregar sus atributos propios.
+     */
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre + " | Duración: " + duracionHoras + " horas");
+    }
+
     public String getNombre() {
         return nombre;
     }

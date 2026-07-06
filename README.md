@@ -2,7 +2,14 @@
 
 ## Objetivo de esta semana
 
-Implementar una jerarquía de clases con **herencia simple** en Java, representando los distintos tipos de servicios turísticos que ofrece la agencia Llanquihue Tour. Se aplican conceptos de atributos heredados, `super()` en constructores y sobreescritura del método `toString()`.
+Aplicar **polimorfismo** sobre la jerarquía de clases construida previamente con herencia simple, representando los distintos tipos de servicios turísticos que ofrece la agencia Llanquihue Tour.
+
+Lo desarrollado esta semana:
+
+- Se sobrescribió el método `mostrarInformacion()` en cada subclase (`RutaGastronomica`, `PaseoLacustre`, `ExcursionCultural`), agregando su información específica a la de la superclase mediante `super.mostrarInformacion()`.
+- Se creó en `GestorServicios` el método `crearServicios()`, que arma una **colección polimórfica** (`List<ServicioTuristico>`) con 6 objetos instanciados a partir de las 3 subclases.
+- Se recorre la colección usando únicamente referencias de la superclase `ServicioTuristico`, invocando `mostrarInformacion()`: en tiempo de ejecución cada objeto ejecuta su propia versión sobrescrita según su tipo real (polimorfismo).
+- La clase `Main` (paquete `ui`) llama a `crearServicios()` y recorre la lista como punto de entrada central del sistema, verificando el comportamiento esperado por consola.
 
 ---
 
@@ -34,8 +41,8 @@ LlanquihueTourS6/
 | `RutaGastronomica` | `model` | Hereda de `ServicioTuristico`, agrega `numeroDeParadas` |
 | `PaseoLacustre` | `model` | Hereda de `ServicioTuristico`, agrega `tipoEmbarcacion` |
 | `ExcursionCultural` | `model` | Hereda de `ServicioTuristico`, agrega `lugarHistorico` |
-| `GestorServicios` | `data` | Crea y muestra dos instancias de cada subclase |
-| `Main` | `ui` | Llama a `GestorServicios` y muestra resultados por consola |
+| `GestorServicios` | `data` | Crea la colección polimórfica (`crearServicios()`) y la recorre (`mostrarServicios()`) |
+| `Main` | `ui` | Obtiene la lista desde `GestorServicios` y la recorre por polimorfismo, mostrando resultados por consola |
 
 ---
 
@@ -43,7 +50,8 @@ LlanquihueTourS6/
 
 - **Herencia simple**: las tres subclases extienden `ServicioTuristico` con `extends`.
 - **`super()`**: cada subclase llama al constructor de la superclase para inicializar `nombre` y `duracionHoras`.
-- **Sobreescritura de `toString()`**: cada subclase muestra su información específica, llamando a `super.toString()` para incluir los atributos heredados.
+- **Sobreescritura de `toString()`** y de **`mostrarInformacion()`**: cada subclase agrega su información específica, llamando a `super.toString()` / `super.mostrarInformacion()` para incluir los atributos heredados.
+- **Polimorfismo**: la colección se declara como `List<ServicioTuristico>` y se recorre con esa misma referencia; al invocar `mostrarInformacion()`, Java ejecuta la versión sobrescrita correspondiente al tipo real de cada objeto (enlace dinámico).
 - **Encapsulamiento**: atributos privados con getters, setters y validaciones básicas.
 
 ---
@@ -72,17 +80,24 @@ mvn exec:java -Dexec.mainClass="org.agencia.ui.Main"
    LLANQUIHUE TOUR - Servicios Turísticos
 ============================================
 
-=== RUTAS GASTRONÓMICAS ===
-[Ruta Gastronómica] Nombre: Sabores del Lago | Duración: 4 horas | Paradas: 5
-[Ruta Gastronómica] Nombre: Ruta del Salmón Chilote | Duración: 6 horas | Paradas: 8
-
-=== PASEOS LACUSTRES ===
-[Paseo Lacustre] Nombre: Navegación Lago Llanquihue | Duración: 3 horas | Embarcación: Catamarán
-[Paseo Lacustre] Nombre: Recorrido Lago Todos los Santos | Duración: 5 horas | Embarcación: Lancha a motor
-
-=== EXCURSIONES CULTURALES ===
-[Excursión Cultural] Nombre: Historia de Puerto Varas | Duración: 3 horas | Lugar histórico: Iglesia del Sagrado Corazón
-[Excursión Cultural] Nombre: Legado Alemán en Los Lagos | Duración: 4 horas | Lugar histórico: Museo Colonial Alemán de Frutillar
+Nombre: Sabores del Lago | Duración: 4 horas
+Tipo: Ruta Gastronómica | N° de paradas: 5
+--------------------------------------------
+Nombre: Ruta del Salmón Chilote | Duración: 6 horas
+Tipo: Ruta Gastronómica | N° de paradas: 8
+--------------------------------------------
+Nombre: Navegación Lago Llanquihue | Duración: 3 horas
+Tipo: Paseo Lacustre | Embarcación: Catamarán
+--------------------------------------------
+Nombre: Recorrido Lago Todos los Santos | Duración: 5 horas
+Tipo: Paseo Lacustre | Embarcación: Lancha a motor
+--------------------------------------------
+Nombre: Historia de Puerto Varas | Duración: 3 horas
+Tipo: Excursión Cultural | Lugar histórico: Iglesia del Sagrado Corazón
+--------------------------------------------
+Nombre: Legado Alemán en Los Lagos | Duración: 4 horas
+Tipo: Excursión Cultural | Lugar histórico: Museo Colonial Alemán de Frutillar
+--------------------------------------------
 
 ============================================
           Fin del catálogo de servicios
