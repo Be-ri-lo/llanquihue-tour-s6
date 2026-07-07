@@ -16,6 +16,9 @@ public class ExcursionCultural extends ServicioTuristico {
         this.lugarHistorico = lugarHistorico;
     }
 
+    /**
+     * Sobrescribe mostrarInformacion() con información específica de cada tipo
+     */
     @Override
     public void mostrarInformacion() {
         super.mostrarInformacion();

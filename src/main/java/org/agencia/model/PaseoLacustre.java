@@ -14,6 +14,9 @@ public class PaseoLacustre extends ServicioTuristico {
         this.tipoEmbarcacion = tipoEmbarcacion;
     }
 
+    /**
+    * Sobrescribe mostrarInformacion() con información específica de cada tipo
+    */
     @Override
     public void mostrarInformacion() {
         super.mostrarInformacion();

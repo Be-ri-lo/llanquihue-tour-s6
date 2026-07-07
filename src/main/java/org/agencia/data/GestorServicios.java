@@ -11,13 +11,16 @@ import java.util.List;
 /**
  * Clase encargada de crear instancias de los servicios turísticos
  * y de administrarlos como una colección polimórfica.
- * Pertenece a la capa de datos.
  */
 public class GestorServicios {
 
     /**
-     * Crea y retorna una colección polimórfica de servicios turísticos,
-     * combinando distintas subclases de ServicioTuristico.
+     * Crea y retorna una colección polimórfica de servicios turísticos
+     * En el paquete data/, modifica o crea la clase GestorServicios:
+     * Declara una colección de tipo List<ServicioTuristico>.
+     * Carga en la lista al menos cinco objetos combinando instancias de las distintas
+     * subclases.
+     * Puedes crear los objetos manualmente; no es necesario leerlos desde archivo.
      */
     public List<ServicioTuristico> crearServicios() {
         List<ServicioTuristico> servicios = new ArrayList<>();
@@ -33,9 +36,11 @@ public class GestorServicios {
     }
 
     /**
-     * Recorre la colección de servicios y muestra la información de cada uno.
-     * Al invocar mostrarInformacion() desde la referencia ServicioTuristico,
-     * cada objeto ejecuta su propia versión sobrescrita (polimorfismo).
+     * Recorre y muestra los objetos aplicando polimorfismo
+     * Desde GestorServicios o Main, recorre la colección usando un bucle for-each.
+     * Llama al método mostrarInformacion() desde la referencia de tipo
+     * ServicioTuristico.
+     * No es necesario ni obligatorio usar instanceof
      */
     public void mostrarServicios() {
         List<ServicioTuristico> servicios = crearServicios();
