@@ -5,7 +5,7 @@ package org.agencia.model;
  * Contiene los atributos comunes que comparten todos los tipos
  * de servicios ofrecidos por Llanquihue Tour.
  */
-public class ServicioTuristico {
+public abstract class ServicioTuristico implements Registrable {
 
     private String nombre;
     private int duracionHoras;
@@ -19,9 +19,8 @@ public class ServicioTuristico {
      * Muestra la información básica del servicio. Las subclases
      * sobrescriben este método para agregar sus atributos propios.
      */
-    public void mostrarInformacion() {
-        System.out.println("Nombre: " + nombre + " | Duración: " + duracionHoras + " horas");
-    }
+    public abstract void mostrarInformacion();
+    
 
     public String getNombre() {
         return nombre;

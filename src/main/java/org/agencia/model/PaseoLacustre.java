@@ -19,7 +19,6 @@ public class PaseoLacustre extends ServicioTuristico {
     */
     @Override
     public void mostrarInformacion() {
-        super.mostrarInformacion();
         System.out.println("Tipo: Paseo Lacustre | Embarcación: " + tipoEmbarcacion);
     }
 
@@ -35,5 +34,17 @@ public class PaseoLacustre extends ServicioTuristico {
     public String toString() {
         return "[Paseo Lacustre] " + super.toString() +
                " | Embarcación: " + tipoEmbarcacion;
+    }
+
+    /**
+     * Implementa el método de la interfaz {@link Registrable}, heredada por
+     * {@link ServicioTuristico}. Reutiliza {@link #toString()} porque ya
+     * contiene toda la información relevante del paseo.
+     *
+     * @return resumen del paseo lacustre.
+     */
+    @Override
+    public String mostrarResumen() {
+        return toString();
     }
 }
