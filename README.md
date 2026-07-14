@@ -1,78 +1,97 @@
-# Llanquihue Tour – Semana 7
+![Duoc UC](https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png)
 
-## Objetivo de esta semana
+# Actividad Sumativa – Semana 8
+## Integrando interfaces, polimorfismo y estructuras dinámicas
 
-Aplicar **polimorfismo** sobre la jerarquía de clases construida en semanas anteriores con herencia simple, representando los distintos tipos de servicios turísticos que ofrece la agencia Llanquihue Tour.
-
-Lo desarrollado esta semana:
-
-- Se sobrescribió el método `mostrarInformacion()` en cada subclase (`RutaGastronomica`, `PaseoLacustre`, `ExcursionCultural`), agregando su información específica a la de la superclase mediante `super.mostrarInformacion()`.
-- En el paquete `data`, se creó en `GestorServicios` el método `crearServicios()`, que declara una colección de tipo `List<ServicioTuristico>` y la carga con al menos cinco objetos combinando instancias de las distintas subclases (colección polimórfica).
-- Se recorre la colección con un bucle `for-each` usando únicamente referencias de tipo `ServicioTuristico`, invocando `mostrarInformacion()`: en tiempo de ejecución cada objeto ejecuta su propia versión sobrescrita según su tipo real (polimorfismo), sin necesidad de usar `instanceof`.
-- La clase `Main` (paquete `ui`) llama al método de `GestorServicios` que retorna la lista y la recorre como punto de entrada central del sistema, mostrando los resultados por consola y verificando que el comportamiento sea el esperado según el tipo de servicio (Paso 4 opcional).
-
-> **Nota:** la entrega de semana 6 (jerarquía de herencia simple, sin polimorfismo) se conserva intacta en la rama `feature/semana6` de este mismo repositorio, para dejar registro separado de cada semana.
+### Proyecto: Llanquihue Tour
 
 ---
 
-## Estructura del proyecto
+## Autor del proyecto
 
-```
-LlanquihueTourS6/
-├── src/main/java/org/agencia/
-│   ├── model/
-│   │   ├── ServicioTuristico.java     ← Superclase base
-│   │   ├── RutaGastronomica.java      ← Subclase
-│   │   ├── PaseoLacustre.java         ← Subclase
-│   │   └── ExcursionCultural.java     ← Subclase
-│   ├── data/
-│   │   └── GestorServicios.java       ← Crea y recorre la colección polimórfica
-│   └── ui/
-│       └── Main.java                  ← Punto de entrada
-├── pom.xml
-└── README.md
-```
+| Campo | Detalle |
+|---|---|
+| **Nombre completo** | Beatriz López Casanova |
+| **Asignatura** | Desarrollo Orientado a Objetos I |
+| **Carrera** | Analista Programador Computacional |
+| **Sede** | Virtual |
 
 ---
 
-## Clases implementadas
+## Descripción general del sistema
 
-| Clase | Paquete | Descripción |
+**Llanquihue Tour** es una agencia de turismo ubicada en la Región de Los Lagos, especializada en rutas gastronómicas, paseos lacustres y excursiones culturales. En esta etapa, el sistema se amplía para gestionar además a los **guías turísticos**, los **vehículos** y los **colaboradores externos** de la agencia, aplicando un contrato de comportamiento común entre todas estas entidades.
+
+Para lograrlo, se define la interfaz `Registrable`, que declara el método `mostrarResumen()`. Tanto la jerarquía de servicios turísticos (`ServicioTuristico`) como la nueva jerarquía de personas (`Persona`) y la clase `Vehiculo` implementan esta interfaz, lo que permite almacenar objetos de **distintas ramas de herencia** dentro de una misma colección genérica (`ArrayList<Registrable>`) y diferenciarlos en tiempo de ejecución mediante `instanceof`.
+
+Adicionalmente, se incorpora una **interfaz gráfica simple** (basada en `JOptionPane`) que permite ingresar nuevos guías, vehículos y colaboradores desde un menú, y visualizar el resumen de todas las entidades registradas.
+
+---
+
+## Estructura de paquetes y clases
+
+```
+src/main/java/org/agencia/
+├── model/
+│   ├── Registrable.java        → Interfaz común: declara mostrarResumen()
+│   ├── ServicioTuristico.java  → Clase abstracta base de los servicios turísticos
+│   ├── RutaGastronomica.java   → Subclase de ServicioTuristico
+│   ├── PaseoLacustre.java      → Subclase de ServicioTuristico
+│   ├── ExcursionCultural.java  → Subclase de ServicioTuristico
+│   ├── Persona.java            → Clase abstracta base de las entidades tipo persona
+│   ├── GuiaTuristico.java      → Subclase de Persona (especialidad, años de experiencia)
+│   ├── ColaboradorExterno.java → Subclase de Persona (empresa, tipo de servicio)
+│   └── Vehiculo.java           → Implementa Registrable directamente (no es una Persona)
+├── data/
+│   ├── GestorServicios.java    → Crea y recorre la colección polimórfica List<ServicioTuristico>
+│   └── GestorEntidades.java    → Colección ArrayList<Registrable>; recorrido con instanceof
+└── ui/
+    ├── Main.java                → Clase principal; orquesta la ejecución del sistema
+    └── InterfazEntidades.java   → GUI simple con JOptionPane para ingresar y visualizar entidades
+```
+
+> No se requiere lectura de archivos externos ni persistencia: los objetos de ejemplo se crean directamente en código, y los nuevos se ingresan a través de la interfaz gráfica.
+
+---
+
+## Relaciones entre clases
+
+| Relación | Tipo | Descripción |
 |---|---|---|
-| `ServicioTuristico` | `model` | Superclase con atributos `nombre` y `duracionHoras`, y el método `mostrarInformacion()` |
-| `RutaGastronomica` | `model` | Hereda de `ServicioTuristico`, agrega `numeroDeParadas` y sobrescribe `mostrarInformacion()` |
-| `PaseoLacustre` | `model` | Hereda de `ServicioTuristico`, agrega `tipoEmbarcacion` y sobrescribe `mostrarInformacion()` |
-| `ExcursionCultural` | `model` | Hereda de `ServicioTuristico`, agrega `lugarHistorico` y sobrescribe `mostrarInformacion()` |
-| `GestorServicios` | `data` | Crea la colección polimórfica (`crearServicios()`) y la recorre (`mostrarServicios()`) |
-| `Main` | `ui` | Obtiene la lista desde `GestorServicios` y la recorre por polimorfismo, mostrando resultados por consola |
+| `RutaGastronomica`, `PaseoLacustre`, `ExcursionCultural` → `ServicioTuristico` | **Herencia** | Heredan `nombre` y `duracionHoras`, y sobrescriben `mostrarInformacion()` |
+| `GuiaTuristico`, `ColaboradorExterno` → `Persona` | **Herencia** | Heredan `nombre` y `telefono` con sus validaciones |
+| `ServicioTuristico` → `Registrable` | **Interfaz** | Aporta el contrato común `mostrarResumen()` a toda la jerarquía de servicios |
+| `Persona` → `Registrable` | **Interfaz** | Aporta el contrato común `mostrarResumen()` a toda la jerarquía de personas |
+| `Vehiculo` → `Registrable` | **Interfaz** | Implementa el contrato sin heredar de ninguna clase base |
+| `GestorEntidades` → `Registrable` | **Agregación / Polimorfismo** | Colección `ArrayList<Registrable>` que almacena objetos de las tres ramas anteriores |
+| `Main` → `GestorServicios` | Uso | Crea la colección de servicios y muestra su información por consola |
+| `Main` → `GestorEntidades` | Uso | Crea la colección de entidades y muestra su resumen por consola |
+| `Main` → `InterfazEntidades` | Uso | Lanza la interfaz gráfica para ingresar y visualizar entidades |
 
 ---
 
-## Conceptos aplicados
+## Instrucciones para ejecutar el programa
 
-- **Herencia simple**: las tres subclases extienden `ServicioTuristico` con `extends`.
-- **`super()`**: cada subclase llama al constructor de la superclase para inicializar `nombre` y `duracionHoras`.
-- **Sobrescritura (`@Override`) de `toString()` y de `mostrarInformacion()`**: cada subclase agrega su información específica, llamando a `super.toString()` / `super.mostrarInformacion()` para incluir los atributos heredados.
-- **Colección polimórfica**: `List<ServicioTuristico>` almacena objetos de distintas subclases al mismo tiempo, gracias a la relación *es-un* de la herencia.
-- **Polimorfismo / enlace dinámico**: la colección se recorre usando únicamente la referencia de la superclase; al invocar `mostrarInformacion()`, Java ejecuta la versión sobrescrita correspondiente al tipo real de cada objeto, sin usar `instanceof` ni *casting*.
-- **Encapsulamiento**: atributos privados con getters y setters.
+### Requisitos previos
 
----
+- Java JDK 17 o superior
+- Maven 3.x (o abrir directamente en IntelliJ IDEA)
 
-## Instrucciones para ejecutar
+### Opción A – Desde IntelliJ IDEA
 
-### Desde IntelliJ IDEA
-1. Abrir el proyecto `LlanquihueTourS6` en IntelliJ IDEA.
-2. Esperar que Maven cargue las dependencias.
-3. Navegar a `src/main/java/org/agencia/ui/Main.java`.
-4. Hacer clic derecho sobre `Main.java` → **Run 'Main.main()'**.
+1. Abrir el proyecto como proyecto Maven en IntelliJ IDEA.
+2. Navegar a `src/main/java/org/agencia/ui/Main.java`.
+3. Hacer clic derecho → **Run 'Main.main()'**.
 
-### Desde terminal (Maven)
+### Opción B – Desde terminal con Maven
+
 ```bash
-cd LlanquihueTourS6
+# Desde la raíz del proyecto
 mvn compile
 mvn exec:java -Dexec.mainClass="org.agencia.ui.Main"
 ```
+
+> **Nota sobre la GUI:** al finalizar la salida por consola se abrirá una ventana de `JOptionPane` con el menú de entidades. Desde ahí puedes registrar un Guía Turístico, un Vehículo o un Colaborador Externo, y elegir la opción "Ver entidades registradas" para ver el resumen de todas ellas (las de ejemplo más las que acabas de ingresar). Selecciona "Salir" o cierra la ventana para terminar la ejecución.
 
 ---
 
@@ -83,26 +102,44 @@ mvn exec:java -Dexec.mainClass="org.agencia.ui.Main"
 Nombre: Sabores del Lago | Duración: 4 horas
 Tipo: Ruta Gastronómica | N° de paradas: 5
 --------------------------------------------
-Nombre: Ruta del Salmón Chilote | Duración: 6 horas
-Tipo: Ruta Gastronómica | N° de paradas: 8
---------------------------------------------
-Nombre: Navegación Lago Llanquihue | Duración: 3 horas
-Tipo: Paseo Lacustre | Embarcación: Catamarán
---------------------------------------------
-Nombre: Recorrido Lago Todos los Santos | Duración: 5 horas
-Tipo: Paseo Lacustre | Embarcación: Lancha a motor
---------------------------------------------
-Nombre: Historia de Puerto Varas | Duración: 3 horas
-Tipo: Excursión Cultural | Lugar histórico: Iglesia del Sagrado Corazón
---------------------------------------------
-Nombre: Legado Alemán en Los Lagos | Duración: 4 horas
-Tipo: Excursión Cultural | Lugar histórico: Museo Colonial Alemán de Frutillar
---------------------------------------------
+...
           Fin del catálogo de servicios     
+
+   LLANQUIHUE TOUR - Entidades Registrables  
+[Guía Turístico] Juan Pérez | Especialidad: Español/Inglés | Teléfono: +56 9 1111 2222 | Experiencia: 5 años
+   -> Especialidad: Español/Inglés
+--------------------------------------------
+[Vehículo] Minibus | Patente: PPU-1234 | Capacidad: 15 pasajeros
+   -> Capacidad: 15 pasajeros
+--------------------------------------------
+[Colaborador Externo] María Soto | Empresa: Hotel Frutillar | Servicio: Alojamiento | Teléfono: +56 9 3333 4444
+   -> Tipo de servicio: Alojamiento
+--------------------------------------------
+[Ruta Gastronómica] Nombre: Sabores del Lago | Duración: 4 horas | Paradas: 5
+--------------------------------------------
+          Fin del listado de entidades      
 ```
+
+A continuación se abre la ventana gráfica (`JOptionPane`) con el menú de entidades descrito arriba.
 
 ---
 
-## Repositorio GitHub
+## Buenas prácticas aplicadas
 
-[https://github.com/Be-ri-lo/Llanquihue-tour](https://github.com/Be-ri-lo/Llanquihue-tour)
+- Interfaz `Registrable` como contrato de comportamiento común entre clases sin relación de herencia directa.
+- Herencia y polimorfismo aplicados en dos jerarquías independientes (`ServicioTuristico` y `Persona`), ambas unificadas mediante la misma interfaz.
+- Uso de `instanceof` para diferenciar el tipo real de cada objeto al recorrer la colección genérica.
+- Colección genérica `ArrayList<Registrable>` para almacenar objetos heterogéneos.
+- Clases abstractas (`ServicioTuristico`, `Persona`) que obligan a las subclases a implementar su propio comportamiento.
+- Atributos `private` en todas las clases del modelo, con getters y setters validados.
+- Manejo de excepciones (`IllegalArgumentException`, `NumberFormatException`) tanto en los setters del modelo como en la interfaz gráfica.
+- Interfaz gráfica simple con `JOptionPane` para el ingreso y visualización de datos, orientada a usuarios no técnicos.
+- Separación de responsabilidades mediante paquetes funcionales (`model`, `data`, `ui`).
+
+---
+
+**Repositorio GitHub:** https://github.com/Be-ri-lo/llanquihue-tour-s6
+
+**Fecha de entrega:** Semana 8 – Julio 2026
+
+© Duoc UC | Escuela de Informática y Telecomunicaciones

@@ -21,7 +21,6 @@ public class ExcursionCultural extends ServicioTuristico {
      */
     @Override
     public void mostrarInformacion() {
-        super.mostrarInformacion();
         System.out.println("Tipo: Excursión Cultural | Lugar histórico: " + lugarHistorico);
     }
 
@@ -39,5 +38,17 @@ public class ExcursionCultural extends ServicioTuristico {
     public String toString() {
         return "[Excursión Cultural] " + super.toString() +
                " | Lugar histórico: " + lugarHistorico;
+    }
+
+    /**
+     * Implementa el método de la interfaz {@link Registrable}, heredada por
+     * {@link ServicioTuristico}. Reutiliza {@link #toString()} porque ya
+     * contiene toda la información relevante de la excursión.
+     *
+     * @return resumen de la excursión cultural.
+     */
+    @Override
+    public String mostrarResumen() {
+        return toString();
     }
 }

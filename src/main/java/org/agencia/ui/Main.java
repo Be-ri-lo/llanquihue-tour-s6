@@ -1,12 +1,13 @@
 package org.agencia.ui;
 
+import org.agencia.data.GestorEntidades;
 import org.agencia.data.GestorServicios;
 import org.agencia.model.ServicioTuristico;
 
 import java.util.List;
 
 /**
- * Clase principal del sistema Llanquihue Tour – Semana 7.
+ * Clase principal del sistema Llanquihue Tour – Semana 8.
  */
 public class Main {
 
@@ -29,5 +30,17 @@ public class Main {
         }
 
         System.out.println("          Fin del catálogo de servicios     ");
+
+        System.out.println();
+        System.out.println("   LLANQUIHUE TOUR - Entidades Registrables  ");
+
+        GestorEntidades gestorEntidades = new GestorEntidades();
+        gestorEntidades.mostrarEntidades();
+
+        System.out.println("          Fin del listado de entidades      ");
+
+        // Interfaz gráfica para ingresar y visualizar entidades
+        InterfazEntidades interfaz = new InterfazEntidades(gestorEntidades);
+        interfaz.mostrarMenu();
     }
 }
