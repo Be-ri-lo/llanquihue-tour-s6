@@ -99,24 +99,21 @@ mvn exec:java -Dexec.mainClass="org.agencia.ui.Main"
 
 ```
    LLANQUIHUE TOUR - Servicios Turísticos  
-Nombre: Sabores del Lago | Duración: 4 horas
 Tipo: Ruta Gastronómica | N° de paradas: 5
 --------------------------------------------
 ...
+Tipo: Excursión Cultural | Lugar histórico: Museo Colonial Alemán de Frutillar
+--------------------------------------------
           Fin del catálogo de servicios     
 
    LLANQUIHUE TOUR - Entidades Registrables  
-[Guía Turístico] Juan Pérez | Especialidad: Español/Inglés | Teléfono: +56 9 1111 2222 | Experiencia: 5 años
-   -> Especialidad: Español/Inglés
---------------------------------------------
-[Vehículo] Minibus | Patente: PPU-1234 | Capacidad: 15 pasajeros
+[Guía Turístico] Juan Pérez | Especialidad: Escalada | Teléfono: +56 9 1111 2222 | Experiencia: 5 años
+   -> Especialidad: Escalada
+[Vehículo] Minibus | Patente: FFTT-34 | Capacidad: 15 pasajeros
    -> Capacidad: 15 pasajeros
---------------------------------------------
 [Colaborador Externo] María Soto | Empresa: Hotel Frutillar | Servicio: Alojamiento | Teléfono: +56 9 3333 4444
    -> Tipo de servicio: Alojamiento
---------------------------------------------
 [Ruta Gastronómica] Nombre: Sabores del Lago | Duración: 4 horas | Paradas: 5
---------------------------------------------
           Fin del listado de entidades      
 ```
 
